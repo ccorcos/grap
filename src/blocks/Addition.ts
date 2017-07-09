@@ -1,3 +1,4 @@
+import { Value } from "reactive-magic"
 import { NumberInput, NumberOutput, FunctionBlock } from "./core"
 
 interface AdditionInput {
@@ -13,11 +14,14 @@ export default class AdditionBlock extends FunctionBlock<
 	AdditionInput,
 	AdditionOutput
 > {
-	input = {
+	input = new Value({
 		x: new NumberInput(0),
 		y: new NumberInput(0),
-	}
+	})
 	output = {
-		sum: new NumberOutput(() => this.input.x.get() + this.input.y.get()),
+		sum: new NumberOutput(() => {
+			const { x, y } = this.input.get()
+			return x.get() + y.get()
+		}),
 	}
 }

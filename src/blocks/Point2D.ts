@@ -1,3 +1,4 @@
+import { Value } from "reactive-magic"
 import { NumberInput, DataBlock } from "./core"
 
 interface PointInput {
@@ -6,8 +7,8 @@ interface PointInput {
 }
 
 export default class Point2D extends DataBlock<PointInput> {
-	input = {
+	input = new Value({
 		x: new NumberInput(0),
 		y: new NumberInput(0),
-	}
+	})
 }
